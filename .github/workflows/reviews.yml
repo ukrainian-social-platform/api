@@ -3,7 +3,7 @@ name: Review assigning
 on:
   workflow_run:
     workflows:
-      - Test
+      - Test & fix issues
     types:
       - completed
   pull_request_review:
