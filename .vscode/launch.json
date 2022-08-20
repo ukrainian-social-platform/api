@@ -1,0 +1,43 @@
+{
+	"version": "0.0.1",
+	"configurations": [
+		{
+			"name": "Start service in dev mode",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceFolder}/node_modules/.bin/nest",
+			"args": [
+				"start",
+				"--watch",
+			],
+			"skipFiles": [
+				"<node_internals>/**",
+			],
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen",
+		},
+		{
+			"name": "Start service with NVM in dev mode",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceFolder}/node_modules/.bin/nest",
+			"args": [
+				"start",
+				"--watch",
+			],
+			"skipFiles": [
+				"<node_internals>/**",
+			],
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen",
+			"runtimeExecutable": "${env:HOME}/.nvm/versions/node/${input:pickVersion}/bin/node",
+		},
+	],
+	"inputs": [
+		{
+			"id": "pickVersion",
+			"type": "command",
+			"command": "extension.node-version",
+		},
+	],
+}
