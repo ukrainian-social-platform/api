@@ -1,0 +1,10 @@
+# Syntax:
+# pr_author:
+#   - reviewer1
+#   - reviewer2
+
+KaMeHb-UA:
+  - Mastrianth
+
+Mastrianth:
+  - KaMeHb-UA
