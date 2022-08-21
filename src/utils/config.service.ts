@@ -7,6 +7,7 @@ import { Name } from './name.decorator';
 
 type Config = {
 	NODE_ENV: 'development' | 'production';
+	SERVER_PORT: string;
 	AMQP_PROTO: string;
 	AMQP_USER: string;
 	AMQP_PASS: string;
@@ -16,6 +17,7 @@ type Config = {
 
 const defaultValues: Config = {
 	NODE_ENV: 'development',
+	SERVER_PORT: '3000',
 	AMQP_PROTO: 'amqp',
 	AMQP_USER: 'guest',
 	AMQP_PASS: 'guest',

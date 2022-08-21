@@ -30,6 +30,10 @@ export class MicroserviceUtilsService {
 		return 'ua.social_platform.api';
 	}
 
+	getGrpcServerUrl(): string {
+		return '0.0.0.0:' + this.config.get('SERVER_PORT');
+	}
+
 	async callRemoteMethod<D = any, R = any>(
 		client: ClientProxy,
 		controller: string,
