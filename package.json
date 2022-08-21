@@ -1,6 +1,7 @@
 {
 	"name": "usp-api-service",
 	"version": "0.0.1",
+	"license": "BSD-3-Clause",
 	"scripts": {
 		"prebuild": "rm -rf dist",
 		"build": "nest build && node build && cd dist && rm -rf src tsconfig.build.tsbuildinfo && yarn install --frozen-lockfile && rm yarn.lock package.json",
