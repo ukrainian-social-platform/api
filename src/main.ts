@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { INestMicroservice } from '@nestjs/common';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { MicroserviceOptions } from '@nestjs/microservices';
 import { AppModule } from '@/app';
 import { MicroserviceUtilsService, CommonUtilsService } from '@/utils';
 import { DynamicGrpcServer } from '@/server';
