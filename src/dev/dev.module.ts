@@ -1,10 +1,7 @@
 import { Module } from '@nestjs/common';
-import { Name, UtilsModule } from '@/utils';
-import { DevServiceProvider } from './dev.provider';
+import { ProtoHotReloadModule } from '@/dev/proto-hot-reload';
 
 @Module({
-	imports: [UtilsModule],
-	providers: [DevServiceProvider],
+	imports: [ProtoHotReloadModule],
 })
-@Name('DevModule')
 export class DevModule {}

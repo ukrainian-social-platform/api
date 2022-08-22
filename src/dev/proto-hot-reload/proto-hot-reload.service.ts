@@ -1,30 +1,23 @@
 import { readFile } from 'node:fs/promises';
-import {
-	Injectable,
-	Logger,
-	OnApplicationBootstrap,
-	OnApplicationShutdown,
-} from '@nestjs/common';
+import { Inject, Logger, OnApplicationBootstrap } from '@nestjs/common';
+import { loadSync as protoLoader } from '@grpc/proto-loader';
 import {
 	CommonUtilsService,
 	CronUtilsService,
 	MicroserviceUtilsService,
-	Name,
 } from '@/utils';
 
-@Injectable()
-@Name('DevService')
-export class DevService
-	implements OnApplicationBootstrap, OnApplicationShutdown
-{
-	private readonly logger = new Logger(DevService.name);
+export class ProtoHotReloadService implements OnApplicationBootstrap {
+	private readonly logger = new Logger(ProtoHotReloadService.name);
 	private lastGrpcProtoContent: string;
 
 	constructor(
+		@Inject(CommonUtilsService)
 		private readonly utils: CommonUtilsService,
+		@Inject(CronUtilsService)
 		private readonly cron: CronUtilsService,
+		@Inject(MicroserviceUtilsService)
 		private readonly microservice: MicroserviceUtilsService,
-		private readonly protoLoader: typeof import('@grpc/proto-loader')['loadSync'],
 	) {}
 
 	private checkGrpcProtoChanges = async (): Promise<void> => {
@@ -45,7 +38,7 @@ export class DevService
 
 	private checkProto() {
 		try {
-			this.protoLoader(this.microservice.getGrpcProtoPath());
+			protoLoader(this.microservice.getGrpcProtoPath());
 			return true;
 		} catch (e) {
 			this.logger.error(e);
@@ -60,13 +53,6 @@ export class DevService
 	}
 
 	async onApplicationBootstrap() {
-		this.logger.log(
-			"Looks like you're in dev environment, enabling local dev stuff",
-		);
 		await this.prepareGrpcHotReload();
-	}
-
-	async onApplicationShutdown() {
-		this.cron.remove(this.checkGrpcProtoChanges);
 	}
 }
