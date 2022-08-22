@@ -1,5 +1,5 @@
 import { readFile } from 'node:fs/promises';
-import { Logger, OnApplicationBootstrap } from '@nestjs/common';
+import { Inject, Logger, OnApplicationBootstrap } from '@nestjs/common';
 import { loadSync as protoLoader } from '@grpc/proto-loader';
 import {
 	CommonUtilsService,
@@ -12,8 +12,11 @@ export class ProtoHotReloadService implements OnApplicationBootstrap {
 	private lastGrpcProtoContent: string;
 
 	constructor(
+		@Inject(CommonUtilsService)
 		private readonly utils: CommonUtilsService,
+		@Inject(CronUtilsService)
 		private readonly cron: CronUtilsService,
+		@Inject(MicroserviceUtilsService)
 		private readonly microservice: MicroserviceUtilsService,
 	) {}
 
