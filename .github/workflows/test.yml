@@ -1,0 +1,37 @@
+name: Test & fix issues
+
+on:
+  pull_request:
+    branches:
+     - develop
+     - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+          check-latest: true
+
+      - name: Check out the code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Get dependencies
+        run: yarn
+
+      - name: Test build
+        run: yarn build
+
+      - name: Test & fix issues
+        run: |
+          yarn lint
+          yarn format
+          git config user.name 'ukrainian-social-platform[bot]'
+          git config user.email '111641002+ukrainian-social-platform[bot]@users.noreply.github.com'
+          git add .
+          git commit -m 'Fix ESLint & Prettier issues' && git push || echo 'No ESLint & Prettier issues found'
