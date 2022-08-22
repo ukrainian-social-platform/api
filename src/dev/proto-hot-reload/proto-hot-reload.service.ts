@@ -6,6 +6,7 @@ import {
 	CronUtilsService,
 	MicroserviceUtilsService,
 } from '@/utils';
+import { GrpcDocsService } from '@/dev/grpc-docs';
 
 export class ProtoHotReloadService implements OnApplicationBootstrap {
 	private readonly logger = new Logger(ProtoHotReloadService.name);
@@ -18,6 +19,7 @@ export class ProtoHotReloadService implements OnApplicationBootstrap {
 		private readonly cron: CronUtilsService,
 		@Inject(MicroserviceUtilsService)
 		private readonly microservice: MicroserviceUtilsService,
+		private readonly grpcDocs: GrpcDocsService,
 	) {}
 
 	private checkGrpcProtoChanges = async (): Promise<void> => {
@@ -28,6 +30,7 @@ export class ProtoHotReloadService implements OnApplicationBootstrap {
 			this.logger.log(
 				`${this.microservice.getGrpcProtoPath()} has been changed, restarting the app`,
 			);
+			await this.grpcDocs.generateDocs();
 			this.utils.reloadApp();
 		}
 	};
@@ -54,5 +57,6 @@ export class ProtoHotReloadService implements OnApplicationBootstrap {
 
 	async onApplicationBootstrap() {
 		await this.prepareGrpcHotReload();
+		await this.grpcDocs.generateDocs();
 	}
 }

@@ -13,6 +13,7 @@ type Config = {
 	AMQP_PASS: string;
 	AMQP_HOST: string;
 	AMQP_PORT: string;
+	DOCS_PORT?: string;
 };
 
 const defaultValues: Config = {
