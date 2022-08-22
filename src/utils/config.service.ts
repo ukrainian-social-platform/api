@@ -36,7 +36,7 @@ export const ConfigServiceProvider: Provider<ConfigService> = {
 	async useFactory() {
 		const logger = new Logger(ConfigService.name);
 		await ConfigModule.envVariablesLoaded;
-		logger.log('Loaded env variables');
+		logger.verbose('Loaded env variables');
 		return new ConfigService(defaultValues);
 	},
 };
