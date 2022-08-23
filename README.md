@@ -1,4 +1,4 @@
-## Wallet service
+## Ukrainian Social Platform API
 
 ### Core
 
