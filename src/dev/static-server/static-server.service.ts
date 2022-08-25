@@ -1,8 +1,4 @@
-import {
-	OnApplicationBootstrap,
-	OnModuleDestroy,
-	OnModuleInit,
-} from '@nestjs/common';
+import { OnApplicationBootstrap } from '@nestjs/common';
 import createServer, { FastifyInstance } from 'fastify';
 import staticPlugin from '@fastify/static';
 import { CommonUtilsService } from '@/utils';
