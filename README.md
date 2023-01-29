@@ -1,9 +1,13 @@
-## Ukrainian Social Platform API
+## Ukrainian Cloud API
 
 ### Core
 
 Service is written using [NestJS](https://docs.nestjs.com/) framework. To create modules, use [Nest CLI](https://docs.nestjs.com/cli/overview) with `yarn run nest ...` (there is no need to install Nest CLI globally).  
 Uses [ESBuild](https://esbuild.github.io/) to bundle production-ready build.
+
+### API
+
+Please, check the full documentation [here](./API.md).
 
 ### Development
 First, create `.env` file (see example in [.env.example](/.env.example)).  
